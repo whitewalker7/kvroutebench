@@ -4,19 +4,6 @@ A reproducible experiment in prefix-aware LLM inference routing: **can placing r
 
 Compare round-robin and cache-aware policies in SMG 1.13.0, with two CPU-only llama.cpp workers running Qwen2.5-0.5B-Instruct Q4_K_M. This is an early, inspectable experiment, not a production router ranking.
 
-## Ten-minute terminal demo
-
-No model server is needed for these saved-evidence commands:
-
-```bash
-python3 scripts/terminal-demo.py intro
-python3 scripts/terminal-demo.py replay
-python3 scripts/terminal-demo.py results
-python3 scripts/terminal-demo.py code
-```
-
-[Speaking order and optional live run](docs/DEMO.md). Replay is clearly labeled as recorded measurements. The live runner also prints readable tables with actual worker assignment, fresh/reused tokens, and TTFT.
-
 ## Open the recorded browser demo
 
 No model download or extra Python packages needed:
@@ -42,7 +29,7 @@ One sequential trace, three prefix families, four repetitions per family, seed 7
 
 A large prefill means more than half the prompt tokens were processed afresh. Mean TTFT was **48.4% lower in this run**. Both policies became fast after warming the relevant workers. These 12 requests per policy do not establish throughput, tail latency, or performance under concurrent load. The round-robin median falls between six slow and six fast requests; its ratio is not a general speedup.
 
-[Methods and limitations](docs/METHODS.md) · [10-minute terminal demo outline](docs/DEMO.md) · [Run manifest](demo/evidence/manifest.json) · [Round-robin CSV](demo/evidence/round_robin/requests.csv) · [Cache-aware CSV](demo/evidence/cache_aware/requests.csv)
+[Methods and limitations](docs/METHODS.md) · [Run manifest](demo/evidence/manifest.json) · [Round-robin CSV](demo/evidence/round_robin/requests.csv) · [Cache-aware CSV](demo/evidence/cache_aware/requests.csv)
 
 ## Reproduce inference locally
 
