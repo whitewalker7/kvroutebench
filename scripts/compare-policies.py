@@ -90,6 +90,50 @@ def summarize(rows):
     }
 
 
+
+def print_heading(policy):
+    name = {"round_robin": "ROUND-ROBIN | alternate workers",
+            "cache_aware": "CACHE-AWARE | prefer matching prefixes"}[policy]
+    print("\n" + "=" * 78)
+    print(name)
+    print("=" * 78)
+    print("W1=:8001 W2=:8002 | bars=fresh-token fraction | LARGE=more than half fresh")
+    print(" #  Family  Worker   Reused / prompt   Fresh     TTFT       Prefill work")
+    print("-" * 78, flush=True)
+
+
+def print_row(row):
+    fresh = row["prompt_tokens"] - row["cached_tokens"]
+    large = fresh > row["prompt_tokens"] / 2
+    bar = "#" * max(1, round(12 * fresh / row["prompt_tokens"]))
+    line = (f"{row['index'] + 1:2}     {'ABC'[row['family']]}     "
+            f"W{WORKERS.index(row['worker']) + 1}      "
+            f"{row['cached_tokens']:4} / {row['prompt_tokens']:<4}   {fresh:5}  "
+            f"{row['ttft_ms']:8.1f} ms  {bar:<12} {'LARGE' if large else 'REUSE'}")
+    # Color only on interactive terminals; saved output stays plain text.
+    import os
+    if sys.stdout.isatty() and 'NO_COLOR' not in os.environ:
+        line = ("\033[33m" if large else "\033[32m") + line + "\033[0m"
+    print(line, flush=True)
+
+
+def print_comparison(summaries):
+    rr, ca = summaries['round_robin'], summaries['cache_aware']
+    print("\n" + "=" * 70)
+    print("RESULTS | this run only")
+    print("=" * 70)
+    print(f"{'Metric':32} {'Round-robin':>16} {'Cache-aware':>16}")
+    print("-" * 70)
+    for label, key, fmt in [('Mean TTFT (ms)', 'mean_ttft_ms', '.1f'),
+                            ('Prompt-token reuse', 'token_weighted_reuse', '.1%')]:
+        print(f"{label:32} {format(rr[key], fmt):>16} {format(ca[key], fmt):>16}")
+    counts = lambda summary: ' / '.join(str(summary['workers'][w]['requests']) for w in WORKERS)
+    print(f"{'Requests on W1 / W2':32} {counts(rr):>16} {counts(ca):>16}")
+    saving = 100 * (1 - ca['mean_ttft_ms'] / rr['mean_ttft_ms'])
+    print(f"\nMean TTFT change: {saving:+.1f}% reduction with cache-aware routing.")
+    print("Sequential CPU traffic; one trace. No throughput or tail-latency claim.")
+    print("Next question: can waiting for a warm worker cost more than new prefill?")
+
 def wait_workers():
     deadline = time.monotonic() + 60
     while time.monotonic() < deadline:
@@ -141,7 +185,7 @@ def run_policy(policy, trace, run_dir):
         try:
             save(directory / "registration.json", wait_gateway(process))
             rows = []
-            print("request family worker cached/prompt TTFT(ms)", flush=True)
+            print_heading(policy)
             for index, item in enumerate(trace):
                 fixture = directory / f"request-{index:02d}.json"
                 save(fixture, item["body"])
@@ -157,8 +201,7 @@ def run_policy(policy, trace, run_dir):
                     writer = csv.DictWriter(output, fieldnames=list(row))
                     writer.writeheader()
                     writer.writerows(rows)
-                print(f"{index:7} {row['family']:6} {row['worker'][-4:]} "
-                      f"{row['cached_tokens']:4}/{row['prompt_tokens']} {row['ttft_ms']:8.1f}", flush=True)
+                print_row(row)
             summary = summarize(rows)
             save(directory / "summary.json", summary)
             return summary
@@ -206,9 +249,7 @@ def main():
         for policy in policies:
             summaries[policy] = run_policy(policy, trace, directory)
         save(directory / "comparison.json", summaries)
-        print("\npolicy       median TTFT   mean TTFT   reused prompt tokens")
-        for policy, summary in summaries.items():
-            print(f"{policy:12} {summary['median_ttft_ms']:10.1f}ms {summary['mean_ttft_ms']:9.1f}ms {summary['token_weighted_reuse']:19.1%}")
+        print_comparison(summaries)
     except Exception as error:
         save(directory / "failure.json", {"error": str(error)})
         raise
