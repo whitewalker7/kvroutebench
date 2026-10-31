@@ -1,0 +1,75 @@
+{
+  "url": "http://127.0.0.1:8010/v1/chat/completions",
+  "request": {
+    "model": "routerbench-tiny",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Dataset d42362caac35263aff632938. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 16,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    }
+  },
+  "http_status": 200,
+  "response_headers": {
+    "server": "llama.cpp",
+    "access-control-allow-origin": "",
+    "x-accel-buffering": "no",
+    "content-type": "text/event-stream",
+    "x-smg-routed-worker-id": "http://127.0.0.1:8002",
+    "x-request-id": "chatcmpl-iyOuvBw1t2lLxZJfy87BaFic",
+    "connection": "close",
+    "transfer-encoding": "chunked",
+    "date": "Tue, 27 Oct 2026 14:25:35 GMT"
+  },
+  "worker": "http://127.0.0.1:8002",
+  "router_request_id": "chatcmpl-iyOuvBw1t2lLxZJfy87BaFic",
+  "request_id": "chatcmpl-0eppGOoGgQGnF711RFDSFEMSfXGcopin",
+  "ttft_ms": 26.285128988092765,
+  "content_chunk_times_ms": [
+    26.285128988092765,
+    40.375056996708736,
+    54.52795799646992,
+    66.93236099090427,
+    80.65618498949334,
+    94.26221999456175,
+    107.34550899360329,
+    120.68011399242096,
+    133.4020159993088,
+    146.07183598855045,
+    158.65886298706755,
+    171.58572599873878,
+    184.11836099403445,
+    196.86656098929234,
+    211.6416869976092,
+    224.43877399200574
+  ],
+  "text": "The purpose of a queue in this warehouse system is to manage the waiting time for",
+  "usage": {
+    "completion_tokens": 16,
+    "prompt_tokens": 595,
+    "total_tokens": 611,
+    "prompt_tokens_details": {
+      "cached_tokens": 594
+    }
+  },
+  "cached_tokens": 594,
+  "server_timings": {
+    "cache_n": 594,
+    "prompt_n": 1,
+    "prompt_ms": 15.731,
+    "prompt_per_token_ms": 15.731,
+    "prompt_per_second": 63.56874960269531,
+    "predicted_n": 16,
+    "predicted_ms": 198.315,
+    "predicted_per_token_ms": 13.221,
+    "predicted_per_second": 75.63724377883669
+  },
+  "done": true,
+  "end_to_end_ms": 224.65020399249624
+}

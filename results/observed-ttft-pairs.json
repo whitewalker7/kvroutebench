@@ -1,0 +1,58 @@
+{
+  "source": "Selected measurements transcribed from learner-pasted client output; not full raw streams.",
+  "limitations": "One pair per prompt; existing worker cache state, no reset. Long-prompt answers differed. Not controlled benchmark averages.",
+  "observations": [
+    {
+      "request_id": "chatcmpl-GHteF27F49QH9nXm9szQeJItPPQkjoLh",
+      "fixture": "configs/changed-first-word.json",
+      "run": "first observed",
+      "prompt_tokens": 39,
+      "cached_tokens": 24,
+      "prompt_n": 15,
+      "completion_tokens": 28,
+      "prompt_ms": 51.531,
+      "ttft_ms": 69.34336099948268,
+      "predicted_ms": 347.038,
+      "end_to_end_ms": 416.24478599987924
+    },
+    {
+      "request_id": "chatcmpl-cCAw0wBWVQQq6kVQ9L1oczquVU9rpf2Z",
+      "fixture": "configs/changed-first-word.json",
+      "run": "identical repeat",
+      "prompt_tokens": 39,
+      "cached_tokens": 38,
+      "prompt_n": 1,
+      "completion_tokens": 28,
+      "prompt_ms": 16.14,
+      "ttft_ms": 33.00946300078067,
+      "predicted_ms": 318.695,
+      "end_to_end_ms": 351.8260909986566
+    },
+    {
+      "request_id": "chatcmpl-Wp5rSin3xoxsXDUZ1vJ4jHAHZQMx3JeN",
+      "fixture": "configs/long-prefix.json",
+      "run": "first observed",
+      "prompt_tokens": 567,
+      "cached_tokens": 24,
+      "prompt_n": 543,
+      "completion_tokens": 36,
+      "prompt_ms": 1515.221,
+      "ttft_ms": 1535.114338999847,
+      "predicted_ms": 499.345,
+      "end_to_end_ms": 2034.4116910018784
+    },
+    {
+      "request_id": "chatcmpl-T7qWLONKCtrCyyL1HiypKsbnl8GQM4Gr",
+      "fixture": "configs/long-prefix.json",
+      "run": "identical repeat",
+      "prompt_tokens": 567,
+      "cached_tokens": 566,
+      "prompt_n": 1,
+      "completion_tokens": 39,
+      "prompt_ms": 21.561,
+      "ttft_ms": 39.87820700058364,
+      "predicted_ms": 483.631,
+      "end_to_end_ms": 523.688139001024
+    }
+  ]
+}

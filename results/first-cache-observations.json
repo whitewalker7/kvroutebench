@@ -1,0 +1,43 @@
+{
+  "source": "Learner-pasted usage/timings from three sequential curl experiments; not a controlled benchmark",
+  "worker": "http://127.0.0.1:8001",
+  "client_ttft_measured": false,
+  "observations": [
+    {
+      "request_id": "chatcmpl-hQC0m5NRQWvi4NKm8LuNPO665dImtxNZ",
+      "prompt": "Explain what a cache does in one short sentence.",
+      "max_tokens": 48,
+      "prompt_tokens": 40,
+      "cached_tokens": 0,
+      "completion_tokens": 28,
+      "prompt_n": 40,
+      "prompt_ms": 126.081,
+      "predicted_ms": 384.183,
+      "ttft_ms": null
+    },
+    {
+      "request_id": "chatcmpl-AI42T2UNCrTO1Ak2ldXFadYkhy4joPTg",
+      "prompt": "Explain what a cache does in one short sentence.",
+      "max_tokens": 48,
+      "prompt_tokens": 40,
+      "cached_tokens": 39,
+      "completion_tokens": 29,
+      "prompt_n": 1,
+      "prompt_ms": 26.429,
+      "predicted_ms": 386.558,
+      "ttft_ms": null
+    },
+    {
+      "request_id": "chatcmpl-7nySIrqS6R1P9mHsK9kn0tnq6xIbZ09K",
+      "prompt": "Explain what a cache does in two short sentences.",
+      "max_tokens": 64,
+      "prompt_tokens": 40,
+      "cached_tokens": 31,
+      "completion_tokens": 32,
+      "prompt_n": 9,
+      "prompt_ms": 65.291,
+      "predicted_ms": 468.176,
+      "ttft_ms": null
+    }
+  ]
+}

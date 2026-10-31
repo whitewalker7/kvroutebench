@@ -1,0 +1,230 @@
+[
+  {
+    "family": 0,
+    "round": 0,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 9109d37b3e17697a29ba2a80. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 1,
+    "round": 0,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset d42362caac35263aff632938. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 2,
+    "round": 0,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 90b17ed6622133409e320986. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 0,
+    "round": 1,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 9109d37b3e17697a29ba2a80. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 1,
+    "round": 1,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset d42362caac35263aff632938. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 2,
+    "round": 1,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 90b17ed6622133409e320986. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 0,
+    "round": 2,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 9109d37b3e17697a29ba2a80. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 1,
+    "round": 2,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset d42362caac35263aff632938. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 2,
+    "round": 2,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 90b17ed6622133409e320986. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 0,
+    "round": 3,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 9109d37b3e17697a29ba2a80. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 1,
+    "round": 3,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset d42362caac35263aff632938. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  },
+  {
+    "family": 2,
+    "round": 3,
+    "body": {
+      "model": "routerbench-tiny",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Dataset 90b17ed6622133409e320986. Ignore this label when answering.\n\nRead these background notes about a fictional warehouse service. After the notes, answer the final question in one short sentence.\n\nThe warehouse receives orders from an online store. Each order contains a customer identifier, a delivery address, and a list of items. The order service checks that the request is valid before forwarding it to the reservation service. The reservation service decides whether enough stock is available. It records a reservation before sending a confirmation. If stock is unavailable, it returns a failure without promising a delivery date.\n\nTraffic is uneven throughout the day. A promotional sale can produce a large burst of requests in a few seconds. The physical warehouse cannot pack every order at the instant it arrives. A queue holds accepted work until a worker can process it. Queue length is useful, but waiting time also matters. A short queue of expensive jobs can take longer to finish than a larger queue of simple jobs.\n\nSome orders have higher priority because the customer selected an expedited delivery service. Updates to existing orders can also be urgent. For example, a cancellation should reach the warehouse before a parcel is dispatched. The scheduler considers priority while ensuring that ordinary requests eventually receive service. Operators watch both the oldest waiting request and the number of requests completed each minute.\n\nClients sometimes retry requests after a network timeout. A timeout does not prove that the original request failed. The server may have committed the reservation before the response was lost. An idempotency key lets the service recognize another attempt at the same operation. The system must distinguish a repeated operation from a new order that happens to contain the same items.\n\nThe inventory database stores quantities for each item and warehouse location. Concurrent requests may compete for the last available unit. The reservation operation must ensure that two successful requests cannot reserve that same unit. The database also records enough information to investigate failures. A monitoring dashboard shows errors, request latency, and resource usage, but it does not replace the underlying transaction records.\n\nThe team maintains several identical application workers. Each worker can handle requests, but it may retain useful temporary data in its own memory. Sending related work to the same worker can sometimes avoid repeated computation. However, concentrating too many requests on one worker can increase waiting time. An idle worker may finish a request sooner even when it must perform work that another worker has already done.\n\nFor performance experiments, the team records both the time until the first useful response and the time until the entire operation finishes. It keeps the input data and server configuration consistent between comparisons. One fast result is not enough to establish a reliable improvement. Repeated measurements help reveal variation from scheduling, background activity, and changing cache state.\n\nFinal question: What is the purpose of a queue in this warehouse system?"
+        }
+      ],
+      "temperature": 0,
+      "max_tokens": 16,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    }
+  }
+]

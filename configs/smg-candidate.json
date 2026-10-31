@@ -1,0 +1,19 @@
+{
+  "package": "smg",
+  "version": "1.13.0",
+  "repository": "https://github.com/smg-project/smg",
+  "source_commit": "91b3e0c440f9ab7971aa3ba48b049d951bd963de",
+  "status": "1.13.0 installed; both policies passed real-worker streaming smoke checks; controlled comparison pending",
+  "source_findings": [
+    "HTTP detection probes /v1/models and supports a generic fallback for unrecognized engines",
+    "Health-check endpoint is configurable; documented default /health",
+    "PyPI release has a CPython abi3 manylinux x86_64 wheel; requires Python >=3.9"
+  ],
+  "pending": [
+    "Install in isolated environment and inspect release-specific CLI",
+    "Verify registration of both llama.cpp workers and model alias",
+    "Verify real streamed TTFT, usage preservation and worker identity",
+    "Verify cache-aware path and disable retries for measured runs",
+    "Compare round-robin and cache-aware within this same release"
+  ]
+}

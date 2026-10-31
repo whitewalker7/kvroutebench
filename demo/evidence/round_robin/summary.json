@@ -1,0 +1,22 @@
+{
+  "requests": 12,
+  "median_ttft_ms": 822.4058990017511,
+  "mean_ttft_ms": 846.6864154979703,
+  "first_round_median_ttft_ms": 1699.6151069906773,
+  "later_rounds_median_ttft_ms": 28.106323996325955,
+  "token_weighted_reuse": 0.5136642498605689,
+  "workers": {
+    "http://127.0.0.1:8001": {
+      "requests": 6,
+      "prompt_tokens_processed": 1744,
+      "server_prompt_ms": 5029.736,
+      "server_generation_ms": 1181.4470000000001
+    },
+    "http://127.0.0.1:8002": {
+      "requests": 6,
+      "prompt_tokens_processed": 1744,
+      "server_prompt_ms": 5020.071,
+      "server_generation_ms": 1292.311
+    }
+  }
+}

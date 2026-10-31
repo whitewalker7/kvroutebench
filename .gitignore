@@ -1,0 +1,17 @@
+.venv/
+.venv-smg/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example
+models/
+*.gguf
+.runs/
+
+# Local coaching and test artifacts
+AGENTS.md
+WORKLOG.md
+MILESTONES.md
+artifacts/

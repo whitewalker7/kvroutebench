@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KVRouteBench · Cache locality, measured</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="brand" href="./">KV<span>Route</span>Bench <small>EXPERIMENT 001</small></a><nav><a href="#method">Method</a><a href="evidence/manifest.json" target="_blank">Evidence ↗</a><a href="https://github.com/whitewalker7/kvroutebench" target="_blank" rel="noopener">GitHub ↗</a></nav></header>
+<main>
+  <section class="intro">
+    <div><p class="eyebrow">LLM INFERENCE / ROUTING EXPERIMENTS</p><h1>Same prompts.<br><span>Different placement.</span></h1><p class="lede">Can a router avoid doing the same prefill work twice?<br>Follow 12 requests through two model workers.</p></div>
+    <aside class="context"><span class="badge">RECORDED RUN · CPU ONLY</span><p>Qwen2.5 · 0.5B · Q4_K_M<br>llama.cpp × 2 · SMG 1.13.0</p><p class="muted">3 prefix families · 4 repetitions<br>Sequential requests · seed <span id="seed">—</span></p></aside>
+  </section>
+  <div id="error" role="alert" hidden></div>
+  <section class="headline-stats" aria-label="Full-run results">
+    <article><p>Mean time to first content</p><strong id="means">—</strong><small>Round-robin → cache-aware</small></article>
+    <article><p>Lower mean TTFT</p><strong id="saving">—</strong><small>For this run, not a general speedup</small></article>
+    <article><p>Prompt-token reuse</p><strong id="reuse">—</strong><small>Token-weighted across all requests</small></article>
+  </section>
+  <section class="experiment">
+    <div class="section-top"><div><p class="eyebrow">FOLLOW THE REQUESTS</p><h2>Placement changes the work.</h2></div><div class="legend"><span class="family a">A</span><span class="family b">B</span><span class="family c">C</span><span>Distinct prompt prefixes</span></div></div>
+    <div class="controls"><button id="play" disabled>Replay saved run</button><button id="reset" class="secondary" disabled>Reset</button><label for="step">Requests revealed <output id="step-label">12 / 12</output></label><input id="step" type="range" min="0" max="12" value="12" disabled><span class="muted">Illustrated playback · not live inference</span></div>
+    <div id="panels" class="panels"></div>
+    <p class="caption">Each bar is one measured request. Both panels share a TTFT scale. Click a request to inspect its evidence. Large prefill = more than half of prompt tokens processed afresh.</p>
+  </section>
+  <section id="detail" class="detail" aria-live="polite"><div><p class="eyebrow">INSPECT A REQUEST</p><h2 id="detail-title">Choose any request bar</h2><p id="detail-text">See actual worker assignment, reused tokens, and the time until the client observed answer content.</p></div><a id="raw-link" hidden target="_blank">Open raw JSON ↗</a></section>
+  <section class="findings"><div><p class="eyebrow">WHAT THE TRACE SHOWS</p><h2 id="finding">—</h2><p>Round-robin sends each family to both workers. Cache-aware routing keeps each family together in this run. Once both workers are warm, round-robin is fast too.</p></div><aside><h3>The trade-off is still ahead.</h3><p>Cache-aware placement can concentrate work. Sequential traffic does not expose competing queues. Concurrency and low-reuse controls are the next experiments.</p></aside></section>
+  <section id="method" class="method"><p class="eyebrow">METHOD & LIMITS</p><h2>A small experiment you can inspect.</h2><div class="method-grid"><article><h3>What stays the same</h3><p>Exact request bodies, model weights, worker image, CPU limits, and streaming client. Each policy starts with restarted workers and a fresh gateway. No warmup; retries disabled.</p></article><article><h3>What we measure</h3><p>Monotonic client time to first nonempty content chunk, final cached-token usage, and SMG’s routed-worker header. Server prompt time is reported separately from TTFT.</p></article><article><h3>What we cannot claim</h3><p>One seed, 12 requests per policy, no concurrent traffic, no cache-capacity pressure. Synthetic labels distinguish otherwise shared warehouse text. No GPU or production throughput claims.</p></article></div><details><summary>Why the median looks dramatic</summary><p>Six round-robin requests are slow and six are fast. Its median lies between those groups. A median ratio does not mean every request sped up by that amount. Inspect the individual bars and mean alongside cache accounting.</p></details><div class="downloads"><a href="evidence/round_robin/requests.csv" download>Round-robin CSV ↓</a><a href="evidence/cache_aware/requests.csv" download>Cache-aware CSV ↓</a><a href="evidence/trace.json" target="_blank">Exact trace ↗</a><a href="evidence/manifest.json" target="_blank">Run manifest ↗</a></div></section>
+  <section class="code"><p class="eyebrow">THE CODE BEHIND THE NUMBERS</p><h2>Workload → gateway → workers → evidence</h2><div class="method-grid"><a href="https://github.com/whitewalker7/kvroutebench/blob/main/scripts/compare-policies.py" target="_blank" rel="noopener"><b>01 / Controlled runner</b><span>Reset caches, replay identical inputs, preserve every result.</span></a><a href="https://github.com/whitewalker7/kvroutebench/blob/main/routerbench/stream_once.py" target="_blank" rel="noopener"><b>02 / Streaming client</b><span>Ignore role-only chunks. Time actual answer content.</span></a><a href="https://github.com/whitewalker7/kvroutebench/tree/main/tests" target="_blank" rel="noopener"><b>03 / Tests</b><span>Verify streaming, accounting, and workload invariants.</span></a></div></section>
+</main>
+<footer><span>KVRouteBench · An open experiment in inference routing</span><span id="run-id">Loading evidence…</span></footer>
+<script src="app.js"></script>
+</body></html>

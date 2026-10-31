@@ -1,0 +1,14 @@
+{
+  "registry": "ghcr.io/ggml-org/llama.cpp",
+  "source_tag": "server",
+  "requested_platform": "linux/amd64",
+  "reference": "ghcr.io/ggml-org/llama.cpp@sha256:5741ab30aae42af23ca57d9b98a6d4544cb09c21f372f92c5ee55312fa8b8b0c",
+  "pull_verified_on": "2026-10-26",
+  "pull_evidence": "Learner supplied docker pull output: exit 0, digest reported, image downloaded.",
+  "server_version": "0.7.0-dev",
+  "server_build": 11889,
+  "server_commit": "d854d98ba",
+  "compiler": "GNU 14.2.0 for Linux x86_64",
+  "version_evidence": "Learner ran the digest-pinned image with --version on 2026-10-26: exit 0.",
+  "inference_verified": true
+}

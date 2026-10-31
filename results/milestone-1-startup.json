@@ -1,0 +1,17 @@
+{
+  "observed_on": "2026-10-26",
+  "worker_name": "kvroutebench-worker-1",
+  "base_url": "http://127.0.0.1:8001",
+  "model_path_in_container": "/models/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+  "evidence": {
+    "source": "docker logs --tail 100 kvroutebench-worker-1 and GET /health",
+    "n_threads": 4,
+    "n_slots": 1,
+    "n_ctx_slot": 4096,
+    "kv_unified": false,
+    "model_loaded": true,
+    "health": {"status": "ok"}
+  },
+  "inference_request_completed": true,
+  "learner_review_completed": false
+}

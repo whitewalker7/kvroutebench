@@ -1,0 +1,60 @@
+[
+  {
+    "id": "01a17dc0-2927-74f6-8b27-014faf720c8c",
+    "model_id": "routerbench-tiny",
+    "url": "http://127.0.0.1:8002",
+    "models": [
+      {
+        "id": "routerbench-tiny",
+        "model_type": [
+          "chat",
+          "completions",
+          "responses",
+          "tools"
+        ]
+      }
+    ],
+    "worker_type": "regular",
+    "connection_mode": "http",
+    "runtime_type": "generic",
+    "labels": {
+      "served_model_name": "routerbench-tiny"
+    },
+    "priority": 50,
+    "cost": 1.0,
+    "max_connection_attempts": 20,
+    "is_healthy": true,
+    "status": "ready",
+    "load": 0,
+    "http2": false
+  },
+  {
+    "id": "01a17dc0-2928-7109-9588-d5026cd8c5ff",
+    "model_id": "routerbench-tiny",
+    "url": "http://127.0.0.1:8001",
+    "models": [
+      {
+        "id": "routerbench-tiny",
+        "model_type": [
+          "chat",
+          "completions",
+          "responses",
+          "tools"
+        ]
+      }
+    ],
+    "worker_type": "regular",
+    "connection_mode": "http",
+    "runtime_type": "generic",
+    "labels": {
+      "served_model_name": "routerbench-tiny"
+    },
+    "priority": 50,
+    "cost": 1.0,
+    "max_connection_attempts": 20,
+    "is_healthy": true,
+    "status": "ready",
+    "load": 0,
+    "http2": false
+  }
+]
