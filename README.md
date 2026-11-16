@@ -29,7 +29,7 @@ One sequential trace, three prefix families, four repetitions per family, seed 7
 
 A large prefill means more than half the prompt tokens were processed afresh. Mean TTFT was **48.4% lower in this run**. Both policies became fast after warming the relevant workers. These 12 requests per policy do not establish throughput, tail latency, or performance under concurrent load. The round-robin median falls between six slow and six fast requests; its ratio is not a general speedup.
 
-[Methods and limitations](docs/METHODS.md) · [Run manifest](demo/evidence/manifest.json) · [Round-robin CSV](demo/evidence/round_robin/requests.csv) · [Cache-aware CSV](demo/evidence/cache_aware/requests.csv)
+[Findings: cache reuse, waiting, and full-response latency](docs/FINDINGS.md) · [Methods and limitations](docs/METHODS.md) · [Run manifest](demo/evidence/manifest.json) · [Round-robin CSV](demo/evidence/round_robin/requests.csv) · [Cache-aware CSV](demo/evidence/cache_aware/requests.csv)
 
 ## Reproduce inference locally
 
@@ -47,7 +47,17 @@ python3 scripts/compare-policies.py --seed 7
 
 Stop any manually running gateway on ports 8010/29010 first. The comparison **restarts both benchmark workers** to clear their RAM cache before each policy, starts a fresh gateway, sends the same trace, and saves raw records under `.runs/comparison-…`. It leaves the workers running. A seeded trace does not seed the router's tie-breaking choices.
 
-To replace the demo with your own completed comparison:
+For a small concurrency experiment:
+
+```bash
+python3 scripts/compare-policies.py --seed 7 --concurrency 3
+```
+
+This sends A/B/C together, waits for all three responses, then starts the next burst. The default remains sequential (`--concurrency 1`). It is a burst experiment, not sustained load. Rows print in completion order; request numbers retain trace identity. Each policy receives the same request bodies, but network arrival order within a burst can differ. Dispatch timestamps are saved separately and include client-process startup overhead; they are not server queue-time measurements. The published results below the dashboard remain the original sequential run until explicitly replaced.
+
+For the low-reuse control, use `--reuse unique` with the same answer length and concurrency as the repeated-prefix comparison. Each request gets a distinct early label; actual cache counts may still include shared chat-template tokens. The default `--reuse repeated` preserves the original workload.
+
+The browser demo currently describes only the original sequential, repeated-prefix, short-answer workload. For other workloads, use `--report` to inspect saved results. To replace the browser demo with a matching completed comparison:
 
 ```bash
 python3 scripts/export-demo.py .runs/comparison-YOUR-RUN-ID

@@ -32,3 +32,31 @@ Round-robin performs six large prefills; cache-aware performs three. Mean TTFT i
 This is one small exploratory run without concurrent queues, cache-capacity pressure, low-reuse controls, or independent repetitions. Do not infer GPU results, production throughput, tail latency, or a universal router winner. The different generated answers do not change later inputs. Answer quality is not evaluated here.
 
 The dashboard replays saved records, not live inference. Its animation timing is illustrative. Headline statistics describe the full run even while only some request rows are revealed.
+
+## Next experiment: three-request bursts
+
+The runner now accepts `--concurrency 3`. Each burst contains one request from each family; all responses must complete before the next burst begins. This preserves sequential repeats within each family while allowing different families to overlap. Default concurrency one preserves the original experiment. No burst inference results have been collected by the assistant.
+
+Read TTFT together with cached tokens and per-worker prompt/decode work. A high cache-hit count does not guarantee low TTFT. TTFT minus server prompt time must not be labeled exact queue time: transport, scheduling, and other work contribute. Both workers share the same host CPU; changes can reflect CPU contention as well as request placement. Router defaults remain unchanged and may not rebalance at this small load. A negative or unchanged result is valid.
+
+This workload does not isolate warm-state queueing from warmup. Next controls are low-reuse input, independent repeated seeds, and separate warm-state experiments before attempting production conclusions.
+
+## Longer-answer workload
+
+Use `--answer-length long` with `--concurrency 3` to ask for a detailed explanation and raise the output cap from 16 to 128 tokens. The requested explanation is intentionally longer than the cap; completion can be truncated or end early. No forced minimum or suppressed end-of-sequence token is used. `Out` records actual completion tokens and `Decode(ms)` records native server generation time. The same generated trace is used for both policies; outputs never become later inputs.
+
+This changes the prompt instruction as well as the output cap. Compare policies within this workload, then inspect changes relative to the short-answer run as exploratory evidence, not an isolated causal effect of answer length. Actual completion lengths can differ across policies. High cache reuse with increased TTFT is consistent with waiting, but direct queue timings are not measured.
+
+## Reporting full-response latency
+
+The summary now reports mean TTFT and mean end-to-end latency, with separate percentage changes. End-to-end timing uses the client's saved `end_to_end_ms`, through stream completion and response-context exit, including terminal usage/DONE handling; it is not exactly time to the last content chunk. Output lengths accompany both metrics.
+
+Use `python3 scripts/compare-policies.py --report .runs/comparison-ID` to recalculate summaries from validated raw records without running inference or modifying historical evidence. A failed or incomplete comparison cannot be reported as successful.
+
+## Low-reuse control
+
+`--reuse unique` assigns every request a different early synthetic label. Round one matches the repeated workload; later rounds replace only that label. All warehouse text after the label, output settings, and burst structure are preserved. Each routing policy receives the same complete trace. A1/B1/C1 followed by A2/B2/C2 in terminal output denotes distinct prefixes, not repeated A/B/C histories. All twelve prompts are tokenized and context-checked before inference. Equal character-length labels can still tokenize to different lengths.
+
+This is a low-reuse control, not cache disabled. Chat-template tokens and the short text before the label can still be reused. Verify actual cached-token counters rather than assuming zero hits. The unchanged suffix cannot generally reuse its original contextual KV state after an early prefix change. This control is specific to the tested engine configuration.
+
+Compare round-robin and cache-aware within this workload first. A reduction in the cache-aware advantage relative to repeated-prefix runs would support the locality explanation. A single run cannot establish equivalence or statistical significance. Seed repeats and policy-order variation are still required. No low-reuse inference measurements have been collected yet.

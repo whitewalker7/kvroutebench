@@ -1,0 +1,46 @@
+{
+  "round_robin": {
+    "requests": 12,
+    "median_ttft_ms": 1949.7285599936731,
+    "mean_ttft_ms": 2035.7294213220787,
+    "first_round_median_ttft_ms": 3928.646545042284,
+    "later_rounds_median_ttft_ms": 392.9545719875023,
+    "token_weighted_reuse": 0.5133853876185165,
+    "workers": {
+      "http://127.0.0.1:8001": {
+        "requests": 6,
+        "prompt_tokens_processed": 1746,
+        "server_prompt_ms": 8848.709,
+        "server_generation_ms": 1632.357
+      },
+      "http://127.0.0.1:8002": {
+        "requests": 6,
+        "prompt_tokens_processed": 1744,
+        "server_prompt_ms": 8608.961,
+        "server_generation_ms": 1733.627
+      }
+    }
+  },
+  "cache_aware": {
+    "requests": 12,
+    "median_ttft_ms": 204.3561739847064,
+    "mean_ttft_ms": 976.0606934917936,
+    "first_round_median_ttft_ms": 2873.8155940081924,
+    "later_rounds_median_ttft_ms": 28.406388009898365,
+    "token_weighted_reuse": 0.7522308979364194,
+    "workers": {
+      "http://127.0.0.1:8001": {
+        "requests": 8,
+        "prompt_tokens_processed": 1175,
+        "server_prompt_ms": 4658.641,
+        "server_generation_ms": 2086.001
+      },
+      "http://127.0.0.1:8002": {
+        "requests": 4,
+        "prompt_tokens_processed": 602,
+        "server_prompt_ms": 2809.444,
+        "server_generation_ms": 1170.827
+      }
+    }
+  }
+}

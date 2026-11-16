@@ -14,6 +14,15 @@ spec.loader.exec_module(comparison)
 def export(source, destination):
     manifest = json.loads((source / 'manifest.json').read_text())
     trace = json.loads((source / 'trace.json').read_text())
+    if (manifest.get('concurrency') != 1 or manifest.get('reuse', 'repeated') != 'repeated'
+            or manifest.get('answer_length', 'short') != 'short'):
+        raise ValueError('Browser demo describes sequential repeated-prefix short answers; use --report for this workload.')
+    if len(trace) != 12 or any(item['family'] != i % 3 or item['round'] != i // 3
+                              or item['body'] != trace[i % 3]['body']
+                              or item['body'].get('max_tokens') != 16
+                              for i, item in enumerate(trace)):
+        raise ValueError('Browser demo requires the original three-family, four-round trace.')
+
     policies = {}
     for policy in ('round_robin', 'cache_aware'):
         rows = []

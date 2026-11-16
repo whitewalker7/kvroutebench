@@ -1,0 +1,6 @@
+{
+  "burst_width": 3,
+  "completed_requests": 12,
+  "elapsed_ms": 13021.126292995177,
+  "note": "Process dispatch times include subprocess overhead; not server queue timings."
+}
